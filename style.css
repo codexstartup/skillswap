@@ -1,1 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
+body {
+    background: #f8fafc;
+    color: #0f172a;
+    transition: 0.3s;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+}
+
+nav h2 {
+    color: #2563eb;
+}
+
+#themeBtn {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.hero {
+    text-align: center;
+    padding: 80px 10%;
+}
+
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+
+.hero p {
+    font-size: 18px;
+    color: #475569;
+    max-width: 600px;
+    margin: auto;
+}
+
+
+.main-btn {
+    margin-top: 30px;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    background: #2563eb;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 8%;
+    flex-wrap: wrap;
+}
+
+
+.card {
+    background: white;
+    padding: 25px;
+    width: 280px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px #00000010;
+    transition: 0.3s;
+}
+
+
+.card:hover {
+    transform: translateY(-10px);
+}
