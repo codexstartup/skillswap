@@ -86,3 +86,25 @@ nav h2 {
 .card:hover {
     transform: translateY(-10px);
 }
+.dark {
+    background: #0f172a;
+    color: white;
+}
+
+.dark nav h2 {
+    color: #60a5fa;
+}
+
+.dark .hero p {
+    color: #cbd5e1;
+}
+
+.dark .card {
+    background: #1e293b;
+    color: white;
+}
+
+.dark #themeBtn {
+    background: #f8fafc;
+    color: #0f172a;
+}
