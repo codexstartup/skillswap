@@ -1,120 +1,560 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>SkillSwap | Learn. Teach. Connect.</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillSwap | Exchange Knowledge</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,Arial,sans-serif;
+}
+
+
+body{
+
+background:#050816;
+color:white;
+overflow-x:hidden;
+transition:.4s;
+
+}
+
+
+/* animated background */
+
+body::before{
+
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+background:linear-gradient(45deg,#2563eb,#9333ea);
+filter:blur(150px);
+top:-150px;
+left:-150px;
+z-index:-1;
+
+}
+
+
+body::after{
+
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:#06b6d4;
+filter:blur(150px);
+bottom:-150px;
+right:-100px;
+z-index:-1;
+
+}
+
+
+
+/* navbar */
+
+nav{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+
+}
+
+
+.logo{
+
+font-size:28px;
+font-weight:800;
+
+}
+
+
+.logo span{
+
+color:#60a5fa;
+
+}
+
+
+.nav-btn{
+
+background:white;
+color:black;
+border:none;
+padding:12px 20px;
+border-radius:30px;
+cursor:pointer;
+
+}
+
+
+
+/* hero */
+
+
+.hero{
+
+min-height:85vh;
+display:flex;
+align-items:center;
+justify-content:space-around;
+padding:50px 8%;
+gap:40px;
+
+}
+
+
+.hero h1{
+
+font-size:70px;
+line-height:1.05;
+
+}
+
+
+.hero h1 span{
+
+background:linear-gradient(90deg,#60a5fa,#c084fc);
+-webkit-background-clip:text;
+color:transparent;
+
+}
+
+
+.hero p{
+
+font-size:20px;
+color:#cbd5e1;
+margin-top:25px;
+max-width:550px;
+
+}
+
+
+.cta{
+
+margin-top:35px;
+padding:16px 35px;
+border:none;
+border-radius:40px;
+background:linear-gradient(90deg,#2563eb,#9333ea);
+color:white;
+font-size:18px;
+cursor:pointer;
+
+}
+
+
+
+/* glass card */
+
+.glass{
+
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+backdrop-filter:blur(20px);
+border-radius:25px;
+
+}
+
+
+
+/* skill showcase */
+
+
+.showcase{
+
+width:330px;
+padding:30px;
+animation:float 4s infinite;
+
+}
+
+
+.skill{
+
+padding:18px;
+margin:15px 0;
+border-radius:20px;
+background:rgba(255,255,255,.12);
+font-size:20px;
+
+}
+
+
+@keyframes float{
+
+50%{
+transform:translateY(-20px);
+}
+
+}
+
+
+
+/* sections */
+
+
+section{
+
+padding:80px 8%;
+text-align:center;
+
+}
+
+
+.title{
+
+font-size:45px;
+margin-bottom:40px;
+
+}
+
+
+.cards{
+
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+
+}
+
+
+.card{
+
+width:300px;
+padding:30px;
+text-align:left;
+
+transition:.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-12px);
+
+}
+
+
+.card h3{
+
+margin-bottom:15px;
+
+}
+
+
+.card p{
+
+color:#cbd5e1;
+
+}
+
+
+
+/* stats */
+
+
+.stats{
+
+display:flex;
+justify-content:center;
+gap:50px;
+flex-wrap:wrap;
+
+}
+
+
+.stat h2{
+
+font-size:40px;
+
+}
+
+
+/* light mode */
+
+
+.light{
+
+background:#f8fafc;
+color:#0f172a;
+
+}
+
+
+.light p{
+
+color:#475569;
+
+}
+
+
+.light .glass,
+.light .card{
+
+background:white;
+border:1px solid #e2e8f0;
+
+}
+
+
+
+footer{
+
+padding:30px;
+text-align:center;
+color:#94a3b8;
+
+}
+
+
+
+/* mobile */
+
+
+@media(max-width:800px){
+
+.hero{
+
+flex-direction:column;
+text-align:center;
+
+}
+
+
+.hero h1{
+
+font-size:45px;
+
+}
+
+
+.showcase{
+
+width:90%;
+
+}
+
+
+nav{
+
+padding:20px;
+
+}
+
+}
+
+
+</style>
+
 </head>
+
+
 
 <body>
 
+
 <nav>
-    <div class="logo">🔄 SkillSwap</div>
 
-    <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Discover</a>
-        <a href="#">How It Works</a>
-        <a href="#">Safety</a>
-    </div>
+<div class="logo">
+🔄 Skill<span>Swap</span>
+</div>
 
-    <button id="themeBtn">🌙</button>
+
+<button class="nav-btn" onclick="theme()">
+🌙
+</button>
+
 </nav>
 
 
-<section class="hero">
 
-    <div class="hero-text">
-
-        <h1>
-            Learn Any Skill.
-            <span>Teach Any Skill.</span>
-        </h1>
-
-        <p>
-            SkillSwap connects people worldwide to exchange knowledge,
-            learn new skills, and grow together.
-        </p>
-
-        <button class="main-btn">
-            Start Swapping 🚀
-        </button>
-
-    </div>
+<div class="hero">
 
 
-    <div class="hero-card">
+<div>
 
-        <div class="skill-card">
-            🎨 Video Editing
-        </div>
-
-        <div class="skill-card">
-            💻 Coding
-        </div>
-
-        <div class="skill-card">
-            🌎 Languages
-        </div>
-
-        <div class="skill-card">
-            💪 Fitness
-        </div>
-
-    </div>
-
-</section>
+<h1>
+Swap Skills.
+<br>
+<span>Grow Together.</span>
+</h1>
 
 
-<section class="how">
+<p>
+A global platform where people exchange knowledge,
+teach their skills, and unlock new opportunities.
+</p>
 
-<h2>How SkillSwap Works</h2>
+
+<button class="cta">
+Start Swapping 🚀
+</button>
+
+
+</div>
+
+
+
+<div class="showcase glass">
+
+
+<div class="skill">
+💻 Coding
+</div>
+
+
+<div class="skill">
+🎨 Design
+</div>
+
+
+<div class="skill">
+🌎 Languages
+</div>
+
+
+<div class="skill">
+💪 Fitness
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<section>
+
+<h2 class="title">
+How It Works
+</h2>
+
 
 <div class="cards">
 
-<div class="card">
-<h3>1️⃣ Create Profile</h3>
-<p>Add skills you can teach and skills you want to learn.</p>
-</div>
 
+<div class="card glass">
 
-<div class="card">
-<h3>2️⃣ Find People</h3>
-<p>Discover people who match your learning goals.</p>
-</div>
-
-
-<div class="card">
-<h3>3️⃣ Swap Skills</h3>
-<p>Connect, learn, teach, and grow together.</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="safety">
-
-<h2>🛡️ Safe Skill Exchange</h2>
+<h3>
+👤 Create Profile
+</h3>
 
 <p>
-Report suspicious users, maintain privacy,
-and learn safely with community trust.
+Show your skills and what you want to learn.
 </p>
 
+</div>
+
+
+<div class="card glass">
+
+<h3>
+🔍 Find People
+</h3>
+
+<p>
+Discover people who match your goals.
+</p>
+
+</div>
+
+
+<div class="card glass">
+
+<h3>
+🤝 Swap Skills
+</h3>
+
+<p>
+Connect and grow together.
+</p>
+
+</div>
+
+
+</div>
+
+
 </section>
+
+
+
+
+<section>
+
+
+<h2 class="title">
+Why SkillSwap?
+</h2>
+
+
+<div class="stats">
+
+
+<div class="stat">
+<h2>🌎</h2>
+<p>Global Community</p>
+</div>
+
+
+<div class="stat">
+<h2>🛡️</h2>
+<p>Safe Learning</p>
+</div>
+
+
+<div class="stat">
+<h2>∞</h2>
+<p>Unlimited Skills</p>
+</div>
+
+
+</div>
+
+
+</section>
+
 
 
 <footer>
 
-<h3>SkillSwap 🔄</h3>
-
-<p>Learn. Teach. Connect.</p>
+SkillSwap © 2026  
+<br>
+Learn • Teach • Connect
 
 </footer>
 
 
-<script src="script.js"></script>
+
+<script>
+
+function theme(){
+
+document.body.classList.toggle("light");
+
+}
+
+</script>
+
 
 </body>
 </html>
