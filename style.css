@@ -2,14 +2,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
     background: #f8fafc;
     color: #0f172a;
-    transition: 0.3s;
+    transition: 0.4s;
 }
+
+
+/* Navbar */
 
 nav {
     display: flex;
@@ -18,93 +21,273 @@ nav {
     padding: 20px 8%;
 }
 
-nav h2 {
+.logo {
+    font-size: 25px;
+    font-weight: bold;
     color: #2563eb;
 }
+
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
 
 #themeBtn {
     border: none;
     background: #2563eb;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 14px;
     border-radius: 50%;
     cursor: pointer;
 }
 
 
+
+/* Hero */
+
 .hero {
-    text-align: center;
-    padding: 80px 10%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 8%;
+    gap: 40px;
+}
+
+
+.hero-text {
+    max-width: 600px;
 }
 
 
 .hero h1 {
-    font-size: 45px;
-    margin-bottom: 20px;
+    font-size: 60px;
+    line-height: 1.1;
+}
+
+
+.hero h1 span {
+    color: #2563eb;
 }
 
 
 .hero p {
-    font-size: 18px;
+    margin-top: 20px;
+    font-size: 20px;
     color: #475569;
-    max-width: 600px;
-    margin: auto;
 }
+
 
 
 .main-btn {
     margin-top: 30px;
-    padding: 15px 35px;
+    padding: 16px 35px;
     border: none;
     border-radius: 30px;
     background: #2563eb;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
 }
+
+
+.main-btn:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* Skill Cards */
+
+.hero-card {
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+
+.skill-card {
+
+    background:white;
+    padding:25px;
+    width:230px;
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.1);
+
+    animation: float 3s infinite;
+}
+
+
+@keyframes float {
+
+50% {
+transform:translateY(-10px);
+}
+
+}
+
+
+
+/* How section */
+
+
+.how {
+    padding:80px 8%;
+    text-align:center;
+}
+
+
+.how h2,
+.safety h2 {
+    font-size:40px;
+}
+
 
 
 .cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px 8%;
-    flex-wrap: wrap;
+
+display:flex;
+justify-content:center;
+gap:25px;
+margin-top:40px;
+flex-wrap:wrap;
+
 }
+
 
 
 .card {
-    background: white;
-    padding: 25px;
-    width: 280px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px #00000010;
-    transition: 0.3s;
+
+background:white;
+padding:30px;
+width:300px;
+border-radius:25px;
+
+transition:0.3s;
+
 }
+
 
 
 .card:hover {
-    transform: translateY(-10px);
-}
-.dark {
-    background: #0f172a;
-    color: white;
+
+transform:translateY(-10px);
+
 }
 
-.dark nav h2 {
-    color: #60a5fa;
+
+
+/* Safety */
+
+
+.safety {
+
+text-align:center;
+padding:80px 10%;
+
+background:#eff6ff;
+
 }
+
+
+.safety p {
+
+font-size:20px;
+margin-top:20px;
+
+}
+
+
+
+/* Footer */
+
+
+footer {
+
+text-align:center;
+padding:30px;
+
+}
+
+
+
+/* Dark Mode */
+
+
+.dark {
+
+background:#020617;
+color:white;
+
+}
+
+
+.dark .card,
+.dark .skill-card {
+
+background:#1e293b;
+
+}
+
 
 .dark .hero p {
-    color: #cbd5e1;
+
+color:#cbd5e1;
+
 }
 
-.dark .card {
-    background: #1e293b;
-    color: white;
+
+.dark .safety {
+
+background:#111827;
+
 }
 
-.dark #themeBtn {
-    background: #f8fafc;
-    color: #0f172a;
+
+.dark .nav-links a {
+
+color:white;
+
+}
+
+
+
+/* Mobile */
+
+
+@media(max-width:800px){
+
+.hero {
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+
+.hero h1 {
+
+font-size:40px;
+
+}
+
+
+.nav-links {
+
+display:none;
+
+}
+
 }
