@@ -40,7 +40,7 @@ body{
 
 .card{
   width:100%;
-  max-width:500px;
+  max-width:550px;
   background:#ffffff10;
   border:1px solid #ffffff20;
   backdrop-filter:blur(20px);
@@ -59,7 +59,8 @@ p{
   margin-bottom:30px;
 }
 
-input{
+input,
+select{
   width:100%;
   padding:15px;
   margin-bottom:15px;
@@ -70,8 +71,23 @@ input{
   outline:none;
 }
 
+select{
+  min-height:120px;
+}
+
+option{
+  background:#111;
+  color:white;
+}
+
 input::placeholder{
   color:#bbb;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  color:#ccc;
 }
 
 button{
@@ -114,8 +130,42 @@ button:hover{
   <input id="name" type="text" placeholder="Full Name">
   <input id="email" type="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-  <input id="teachSkills" type="text" placeholder="Skills you can teach">
-  <input id="learnSkills" type="text" placeholder="Skills you want to learn">
+
+  <label>Skills you can teach</label>
+  <select id="teachSkills" multiple>
+    <option>Python</option>
+    <option>JavaScript</option>
+    <option>Web Development</option>
+    <option>App Development</option>
+    <option>AI/ML</option>
+    <option>Cybersecurity</option>
+    <option>Graphic Design</option>
+    <option>UI/UX Design</option>
+    <option>Video Editing</option>
+    <option>Marketing</option>
+    <option>Sales</option>
+    <option>Public Speaking</option>
+    <option>English</option>
+    <option>Fitness</option>
+  </select>
+
+  <label>Skills you want to learn</label>
+  <select id="learnSkills" multiple>
+    <option>Python</option>
+    <option>JavaScript</option>
+    <option>Web Development</option>
+    <option>App Development</option>
+    <option>AI/ML</option>
+    <option>Cybersecurity</option>
+    <option>Graphic Design</option>
+    <option>UI/UX Design</option>
+    <option>Video Editing</option>
+    <option>Marketing</option>
+    <option>Sales</option>
+    <option>Public Speaking</option>
+    <option>English</option>
+    <option>Fitness</option>
+  </select>
 
   <button onclick="signup()">Create Account</button>
 
@@ -158,8 +208,14 @@ window.signup = async function () {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
-  const teachSkills = document.getElementById("teachSkills").value.trim();
-  const learnSkills = document.getElementById("learnSkills").value.trim();
+
+  const teachSkills =
+    [...document.getElementById("teachSkills").selectedOptions]
+    .map(option => option.value);
+
+  const learnSkills =
+    [...document.getElementById("learnSkills").selectedOptions]
+    .map(option => option.value);
 
   if (!name || !email || !password) {
     alert("Please fill Name, Email and Password.");
