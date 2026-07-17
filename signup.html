@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
   margin:0;
   padding:0;
@@ -86,6 +85,10 @@ button{
   cursor:pointer;
 }
 
+button:hover{
+  opacity:0.9;
+}
+
 .login-link{
   text-align:center;
   margin-top:20px;
@@ -96,7 +99,6 @@ button{
   color:#8b5cf6;
   text-decoration:none;
 }
-
 </style>
 </head>
 
@@ -115,7 +117,7 @@ button{
   <input id="teachSkills" type="text" placeholder="Skills you can teach">
   <input id="learnSkills" type="text" placeholder="Skills you want to learn">
 
-  <button id="signupBtn">Create Account</button>
+  <button onclick="signup()">Create Account</button>
 
   <div class="login-link">
     Already have an account?
@@ -123,6 +125,77 @@ button{
   </div>
 
 </div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBhsZOsR47EJgyK-zurptpcTZz61FbkG0c",
+  authDomain: "skillswapog.firebaseapp.com",
+  projectId: "skillswapog",
+  storageBucket: "skillswapog.firebasestorage.app",
+  messagingSenderId: "816831254904",
+  appId: "1:816831254904:web:568e6cf3a95ce37d33b88d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.signup = async function () {
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const teachSkills = document.getElementById("teachSkills").value.trim();
+  const learnSkills = document.getElementById("learnSkills").value.trim();
+
+  if (!name || !email || !password) {
+    alert("Please fill Name, Email and Password.");
+    return;
+  }
+
+  try {
+
+    const userCredential =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "users", user.uid), {
+      name,
+      email,
+      teachSkills,
+      learnSkills,
+      createdAt: new Date().toISOString()
+    });
+
+    alert("Account created successfully 🚀");
+
+    window.location.href = "login.html";
+
+  } catch (error) {
+    alert(error.message);
+    console.error(error);
+  }
+};
+
+</script>
 
 </body>
 </html>
