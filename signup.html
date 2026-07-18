@@ -1,257 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkillSwap - Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap - Join the Network</title>
+    
+    <style>
+        /* Global Reset & Matching Base Gradient */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cabinet Grotesk', 'Segoe UI', system-ui, sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 100% 0%, #4f46e5 0%, transparent 35%),
+                        radial-gradient(circle at 0% 100%, #06b6d4 0%, transparent 40%),
+                        #0f172a;
+            overflow-y: auto; /* Allow scrolling if screen size is small */
+            padding: 40px 20px;
+            perspective: 1000px;
+        }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,sans-serif;
-}
+        /* Glassmorphic Container */
+        .glass-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px; /* Slightly wider to accommodate dual skill fields */
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+        }
 
-body{
-  min-height:100vh;
-  background:#050505;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  overflow:hidden;
-}
+        .glass-container::before {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            background: linear-gradient(45deg, #06b6d4, #4f46e5);
+            z-index: -1;
+            border-radius: 30px;
+            opacity: 0.12;
+            filter: blur(40px);
+            pointer-events: none;
+        }
 
-.glow{
-  position:fixed;
-  width:500px;
-  height:500px;
-  background:linear-gradient(45deg,#7c3aed,#2563eb);
-  filter:blur(150px);
-  opacity:.5;
-  top:-200px;
-  left:-150px;
-  z-index:-1;
-}
+        h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            transform: translateZ(30px);
+        }
 
-.card{
-  width:100%;
-  max-width:550px;
-  background:#ffffff10;
-  border:1px solid #ffffff20;
-  backdrop-filter:blur(20px);
-  border-radius:30px;
-  padding:35px;
-}
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            transform: translateZ(20px);
+        }
 
-h1{
-  text-align:center;
-  margin-bottom:10px;
-}
+        .input-group {
+            margin-bottom: 18px;
+            text-align: left;
+            transform: translateZ(25px);
+        }
 
-p{
-  text-align:center;
-  color:#aaa;
-  margin-bottom:30px;
-}
+        .input-group label {
+            display: block;
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-input,
-select{
-  width:100%;
-  padding:15px;
-  margin-bottom:15px;
-  border:none;
-  border-radius:15px;
-  background:#ffffff10;
-  color:white;
-  outline:none;
-}
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-select{
-  min-height:120px;
-}
+        .input-group input:focus, .input-group textarea:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #06b6d4;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+        }
 
-option{
-  background:#111;
-  color:white;
-}
+        .input-group input::placeholder, .input-group textarea::placeholder {
+            color: #64748b;
+        }
 
-input::placeholder{
-  color:#bbb;
-}
+        .input-group small {
+            display: block;
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
 
-label{
-  display:block;
-  margin-bottom:8px;
-  color:#ccc;
-}
+        /* Animated Action Button */
+        .btn {
+            position: relative;
+            background: linear-gradient(135deg, #06b6d4 0%, #4f46e5 100%);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            transform: translateZ(35px);
+        }
 
-button{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:15px;
-  background:linear-gradient(90deg,#7c3aed,#2563eb);
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
+        .btn:hover {
+            transform: translateZ(40px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+        }
 
-button:hover{
-  opacity:0.9;
-}
+        .btn:active {
+            transform: translateZ(30px) scale(0.98);
+        }
 
-.login-link{
-  text-align:center;
-  margin-top:20px;
-  color:#aaa;
-}
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
 
-.login-link a{
-  color:#8b5cf6;
-  text-decoration:none;
-}
-</style>
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        .switch-page {
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            transform: translateZ(20px);
+        }
+
+        .switch-page a {
+            color: #06b6d4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .switch-page a:hover {
+            color: #22d3ee;
+            text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="glow"></div>
+    <div class="glass-container" id="tiltCard">
+        <h2>Create Account</h2>
+        <p>Start trading knowledge across the globe.</p>
+        
+        <form id="signupForm">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="username" placeholder="Aman Sharma" required>
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="you@example.com" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Min. 6 characters" required>
+            </div>
+            <div class="input-group">
+                <label>Skills You Can Teach</label>
+                <input type="text" id="teachSkills" placeholder="Python, Guitar, Public Speaking" required>
+                <small>Separate your skills with commas</small>
+            </div>
+            <div class="input-group">
+                <label>Skills You Want to Learn</label>
+                <input type="text" id="learnSkills" placeholder="Graphic Design, Marketing" required>
+                <small>Separate your skills with commas</small>
+            </div>
 
-<div class="card">
+            <button type="submit" class="btn">Create Account</button>
+        </form>
 
-  <h1>Create Account 🚀</h1>
-  <p>Join SkillSwap and start exchanging skills.</p>
+        <div class="switch-page">
+            Already have an account? <a href="index.html">Log In</a>
+        </div>
+    </div>
 
-  <input id="name" type="text" placeholder="Full Name">
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+    <!-- SDK INJECTION AND FIREBASE ROUTINES -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  <label>Skills you can teach</label>
-  <select id="teachSkills" multiple>
-    <option>Python</option>
-    <option>JavaScript</option>
-    <option>Web Development</option>
-    <option>App Development</option>
-    <option>AI/ML</option>
-    <option>Cybersecurity</option>
-    <option>Graphic Design</option>
-    <option>UI/UX Design</option>
-    <option>Video Editing</option>
-    <option>Marketing</option>
-    <option>Sales</option>
-    <option>Public Speaking</option>
-    <option>English</option>
-    <option>Fitness</option>
-  </select>
+        // Integrated configuration values securely
+        const firebaseConfig = {
+            apiKey: "AIzaSyBhsZOsR47EJgyK-zurptpcTZz61FbkG0c",
+            authDomain: "skillswapog.firebaseapp.com",
+            projectId: "skillswapog",
+            storageBucket: "skillswapog.firebasestorage.app",
+            messagingSenderId: "816831254904",
+            appId: "1:816831254904:web:568e6cf3a95ce37d33b88d"
+        };
 
-  <label>Skills you want to learn</label>
-  <select id="learnSkills" multiple>
-    <option>Python</option>
-    <option>JavaScript</option>
-    <option>Web Development</option>
-    <option>App Development</option>
-    <option>AI/ML</option>
-    <option>Cybersecurity</option>
-    <option>Graphic Design</option>
-    <option>UI/UX Design</option>
-    <option>Video Editing</option>
-    <option>Marketing</option>
-    <option>Sales</option>
-    <option>Public Speaking</option>
-    <option>English</option>
-    <option>Fitness</option>
-  </select>
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-  <button onclick="signup()">Create Account</button>
+        // UI 3D Interactive Script
+        const card = document.getElementById('tiltCard');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
 
-  <div class="login-link">
-    Already have an account?
-    <a href="login.html">Login</a>
-  </div>
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            card.style.transition = "transform 0.5s ease";
+        });
 
-</div>
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = "none";
+        });
 
-<script type="module">
+        // Auth Process + Writing Profile Document to Firestore
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Format input strings cleanly into arrays (removes extra spaces)
+            const skillsToTeach = document.getElementById('teachSkills').value.split(',').map(s => s.trim()).filter(s => s);
+            const skillsToLearn = document.getElementById('learnSkills').value.split(',').map(s => s.trim()).filter(s => s);
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+            try {
+                // 1. Authenticate user inside Firebase Auth system
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
 
-import {
-  getFirestore,
-  doc,
-  setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+                // 2. Provision their profile document inside Firestore database matching Phase 1 model
+                await setDoc(doc(db, "users", user.uid), {
+                    uid: user.uid,
+                    name: name,
+                    email: email,
+                    skills_to_teach: skillsToTeach,
+                    skills_to_learn: skillsToLearn,
+                    rating: 5.0, // Default baseline ranking
+                    xp: 0,       // Initialize starting gamification state
+                    badges: ["🐣 New Swapper"]
+                });
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBhsZOsR47EJgyK-zurptpcTZz61FbkG0c",
-  authDomain: "skillswapog.firebaseapp.com",
-  projectId: "skillswapog",
-  storageBucket: "skillswapog.firebasestorage.app",
-  messagingSenderId: "816831254904",
-  appId: "1:816831254904:web:568e6cf3a95ce37d33b88d"
-};
+                alert("Account created successfully! Welcome to SkillSwap.");
+                window.location.href = "dashboard.html"; // Redirect straight onto the core interface
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-window.signup = async function () {
-
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-
-  const teachSkills =
-    [...document.getElementById("teachSkills").selectedOptions]
-    .map(option => option.value);
-
-  const learnSkills =
-    [...document.getElementById("learnSkills").selectedOptions]
-    .map(option => option.value);
-
-  if (!name || !email || !password) {
-    alert("Please fill Name, Email and Password.");
-    return;
-  }
-
-  try {
-
-    const userCredential =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-    const user = userCredential.user;
-
-    await setDoc(doc(db, "users", user.uid), {
-      name,
-      email,
-      teachSkills,
-      learnSkills,
-      createdAt: new Date().toISOString()
-    });
-
-    alert("Account created successfully 🚀");
-
-    window.location.href = "login.html";
-
-  } catch (error) {
-    alert(error.message);
-    console.error(error);
-  }
-};
-
-</script>
-
+            } catch (error) {
+                alert("Registration Failed: " + error.message);
+            }
+        });
+    </script>
 </body>
 </html>
