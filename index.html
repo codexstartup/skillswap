@@ -115,7 +115,7 @@
             color: #64748b;
         }
 
-        /* 5. OG Animated Button */
+        /* 5. Buttons */
         .btn {
             position: relative;
             background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
@@ -139,12 +139,8 @@
             box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
         }
 
-        /* Active click effect */
-        .btn:active {
-            transform: translateZ(30px) scale(0.98);
-        }
+        .btn:active { transform: translateZ(30px) scale(0.98); }
 
-        /* Shiny reflection overlay on hover */
         .btn::after {
             content: '';
             position: absolute;
@@ -154,11 +150,48 @@
             transition: all 0.5s ease;
         }
 
-        .btn:hover::after {
-            left: 100%;
+        .btn:hover::after { left: 100%; }
+
+        /* Divider Text */
+        .divider {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            position: relative;
+            transform: translateZ(20px);
         }
 
-        /* 6. Footer Links */
+        /* 6. Google Button Integration */
+        .google-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            transform: translateZ(30px);
+        }
+
+        .google-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .google-btn img {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* 7. Footer Links */
         .switch-page {
             margin-top: 24px;
             font-size: 0.9rem;
@@ -198,6 +231,14 @@
             <button type="submit" class="btn">Log In</button>
         </form>
 
+        <div class="divider">or</div>
+
+        <!-- Google Authentication Button -->
+        <button id="googleAuthBtn" class="google-btn">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+            Continue with Google
+        </button>
+
         <div class="switch-page">
             Don't have an account? <a href="signup.html">Sign Up</a>
         </div>
@@ -206,7 +247,7 @@
     <!-- JAVASCRIPT: 3D MOUSE HOVER ANIMATION + FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         // Integrated configuration values securely
         const firebaseConfig = {
@@ -220,41 +261,51 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        
+        // Setup Google Auth Provider Instance
+        const googleProvider = new GoogleAuthProvider();
 
         // 3D Tilt Hover Animation Logic
         const card = document.getElementById('tiltCard');
         
         document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25; // Rotate angle sensitivity
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            
             card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
 
-        // Reset positions smoothly when mouse leaves screen center area
         document.addEventListener('mouseleave', () => {
             card.style.transform = `rotateY(0deg) rotateX(0deg)`;
             card.style.transition = "transform 0.5s ease";
         });
 
         card.addEventListener('mouseenter', () => {
-            card.style.transition = "none"; // Disables delay while hovering for instant tracking
+            card.style.transition = "none";
         });
 
-        // Handle Firebase Login Form Submission
+        // Handle Email/Password Login
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
 
             signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
+                .then(() => {
                     alert("Logged in successfully!");
                     window.location.href = "dashboard.html";
                 })
+                .catch((error) => { alert("Error: " + error.message); });
+        });
+
+        // Handle Google Sign-In Routine
+        document.getElementById('googleAuthBtn').addEventListener('click', () => {
+            signInWithPopup(auth, googleProvider)
+                .then((result) => {
+                    alert(`Welcome, ${result.user.displayName}!`);
+                    window.location.href = "dashboard.html";
+                })
                 .catch((error) => {
-                    alert("Error: " + error.message);
+                    alert("Google Authentication Failed: " + error.message);
                 });
         });
     </script>
