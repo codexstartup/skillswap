@@ -208,20 +208,20 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // 1. Paste your Firebase Config keys right here:
+        // Integrated configuration values securely
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyBhsZOsR47EJgyK-zurptpcTZz61FbkG0c",
+            authDomain: "skillswapog.firebaseapp.com",
+            projectId: "skillswapog",
+            storageBucket: "skillswapog.firebasestorage.app",
+            messagingSenderId: "816831254904",
+            appId: "1:816831254904:web:568e6cf3a95ce37d33b88d"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // 2. 3D Tilt Hover Animation Logic
+        // 3D Tilt Hover Animation Logic
         const card = document.getElementById('tiltCard');
         
         document.addEventListener('mousemove', (e) => {
@@ -241,7 +241,7 @@
             card.style.transition = "none"; // Disables delay while hovering for instant tracking
         });
 
-        // 3. Handle Firebase Login Form Submission
+        // Handle Firebase Login Form Submission
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
